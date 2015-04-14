@@ -31,8 +31,9 @@ class InlinerServiceProvider extends ServiceProvider {
 	public function register()
 	{
 		$this->app['emil.inliner'] = $this->app->share(function($app){
-            $options = $this->app['config']->get('inliner::options');
-			return new Inliner($options);
+      $options = $this->app['config']->get('inliner::options');
+			$rubyPath = $this->app['config']->get('inliner::ruby_path');
+			return new Inliner($options, $rubyPath);
 		});
 
 		$this->app->booting(function() {
