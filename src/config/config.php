@@ -23,5 +23,7 @@ return array(
         'remove_ids' => false,
         'remove_scripts' => true,
         'replace_html_entities' => false
-    )
+    ),
+
+    'ruby_path' => '/usr/bin/ruby'
 );

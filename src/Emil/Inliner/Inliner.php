@@ -6,10 +6,12 @@ use Premailer;
 class Inliner {
 
     protected $options;
+    private $rubyPath;
 
-    public function __construct($options)
+    public function __construct($options, $rubyPath)
     {
         $this->options= $options;
+        $this->rubyPath = $rubyPath;
     }
 
     protected $enabled = true;
@@ -77,7 +79,7 @@ class Inliner {
      */
     public function inline($content)
     {
-        $premailer = new Premailer($content);
+        $premailer = new Premailer($content, $this->rubyPath);
 
         foreach($this->options as $name => $value)
         {

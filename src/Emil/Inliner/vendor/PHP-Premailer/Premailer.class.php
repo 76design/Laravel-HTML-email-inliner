@@ -49,6 +49,8 @@
          */
         protected $_markup;
 
+        private $_rubyPath;
+
         /**
          * _notSupported
          * 
@@ -69,15 +71,16 @@
 
         /**
          * __construct
-         * 
+         *
          * @access public
-         * @param  string $markup
-         * @return void
+         * @param string $markup
+         * @param string $rubyPath
          */
-        public function __construct($markup)
+        public function __construct($markup, $rubyPath)
         {
             $this->_markup = $markup;
             $this->_arguments['with_html_string'] = false;
+            $this->_rubyPath = $rubyPath;
         }
 
         /**
@@ -139,6 +142,9 @@
             $output = array();
             $returnVar = 0;
             $command = ($scriptPath) . ' ' . $this->_getArgumentString();
+            if(!empty($this->_rubyPath)) {
+                $command = $this->_rubyPath . ' ' . $command;
+            }
             $response = exec($command, $output, $returnVar);
             unlink($this->cacheDir . $this->fileName);
             if ($returnVar === 1) {
